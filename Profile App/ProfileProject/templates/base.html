@@ -1,0 +1,35 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Connecting to CSS file -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+
+    <title>Profile App</title>
+</head>
+<body>
+    <div class="container">
+        <div class="welcomeMessage">
+            <h1>Welcome To</h1>
+            <h2>Our Application</h2>
+            <h3>For Your</h3>
+            <h2>Profile Setup</h2>
+        </div>
+        <div class="linksSide">
+            <div class="regSide">
+                <h3>Don't have an Account?</h3>
+                <button type="button">Register</button>
+            </div>
+            <div class="logSide">
+                <h3>Already have an Account?</h3>
+                <button type="button">Log In</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
