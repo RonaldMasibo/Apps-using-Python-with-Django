@@ -1,0 +1,30 @@
+
+
+body{
+    background-color: rgb(158, 156, 156);
+    background-image: linear-gradient(to right, rgb(158, 156, 156), rgb(196, 185, 185));
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border: 1px solid rgb(65, 56, 56);
+    border-radius: 5px;
+    box-shadow: 2px 2px rgb(50, 52, 53);
+    background-color: white;
+    margin: 150px 250px;
+    padding: 150px;
+}
+
+.welcomeMessage{
+    padding-right: 120px;
+    text-align: center;
+    border-right: 1px solid gray;
+}
+
+.linksSide{
+    padding-left: 60px;
+}
+

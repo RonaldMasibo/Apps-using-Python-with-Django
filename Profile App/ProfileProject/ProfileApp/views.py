@@ -7,14 +7,14 @@ def base(request):
     return render(request, 'base.html')
 
 
-def register(request)
+#def register(request)
 
 
-def login(request)
+#def login(request)
     
 
-def home(request)
+#def home(request)
 
 
-def profile(request)
+#def profile(request)
 
