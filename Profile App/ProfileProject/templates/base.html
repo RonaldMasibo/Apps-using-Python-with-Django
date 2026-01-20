@@ -21,11 +21,16 @@
         <div class="linksSide">
             <div class="regSide">
                 <h3>Don't have an Account?</h3>
-                <button type="button">Register</button>
+                <button type="button">
+                    <a href="{% url 'register' %}">Register</a>
+                </button>
             </div>
             <div class="logSide">
                 <h3>Already have an Account?</h3>
-                <button type="button">Log In</button>
+                <button type="button">
+                    <!--<a href="http://">Log In</a> -->
+                    Log In
+                </button>
             </div>
         </div>
     </div>
