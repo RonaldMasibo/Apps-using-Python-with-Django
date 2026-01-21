@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .forms import RegisteredUsersForm
+from .forms import RegisteredUsersForm, LoginUsersForm
 from .models import RegisteredUsersModel
-from django.contrib.auth.hashers import make_password # For saving a hashed password
+from django.contrib.auth.hashers import make_password, check_password # For making & checking a hashed password
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 
@@ -52,7 +53,30 @@ def register(request):
 
 
 def login(request):
-    return render(request, 'login.html')
+
+    if request.method == 'POST':
+
+        First_Name = request.POST['First_Name']
+        Email = request.POST['Email']
+        Password = request.POST['Password']
+
+        user = authenticate(
+            request,
+            First_Name = First_Name,
+            Email = Email,
+            Password = Password
+        )
+
+        if user is not None:
+            form = login(request, user)
+            messages.success(request, f'Welcome {First_Name} !!')
+            return redirect('home')
+        else:
+            messages.info(request, f'The Account does not exist!!!')
+
+    form = LoginUsersForm()
+        
+    return render(request, 'login.html', {'form':form})
     
 
 #def home(request)

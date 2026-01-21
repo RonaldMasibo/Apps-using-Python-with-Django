@@ -11,9 +11,42 @@
     <!-- CSS file -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
 
+    {% for message in messages %}
+        <script>
+            alert(`${message}`)
+        </script>
+    {% endfor %}
 
 </head>
 <body>
-    <div class="container"></div>
+    <div class="container">
+        <h2>Log In</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="top">
+                <div>
+                    <label>First Name</label>
+                    {{form.First_Name}}
+                </div>
+                <br><br>
+                <div>
+                    <label>Email</label>
+                    {{form.Email}}
+                </div>
+                <br><br>
+                <div>
+                    <label>Password</label>
+                    {{form.Password}}
+                </div>
+                <br><br>
+            </div>
+            <div class="bottom">
+                <input type="submit" value="Log In">
+                <a href="{% url 'register' %}">
+                    <button type="button">Register</button>
+                </a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

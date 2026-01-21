@@ -11,13 +11,16 @@
     <!-- Connecting to CSS file -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
 
+    {% for message in messages %}
+        <script>
+            alert(`${message}`)
+        </script>
+    {% endfor %}
+
 </head>
 <body>
     <div class="container">
         <h1>Sign Up Below</h1>
-        {% for message in messages %}
-            <h5>{{message}}</h5>
-        {% endfor %}
         <form method="POST">
             {% csrf_token %}
             <div class="top">
@@ -54,9 +57,9 @@
             </div>
             <div class="bottom">
                 <input type="submit" value="Register">
-                <button type="button">
-                    <a href="{% url 'login' %}">Login</a>
-                </button>
+                <a href="{% url 'login' %}">
+                    <button type="button">Log In</button>
+                </a>
             </div>
         </form>
     </div>
