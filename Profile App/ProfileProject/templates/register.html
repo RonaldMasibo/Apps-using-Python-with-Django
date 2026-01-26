@@ -11,14 +11,11 @@
     <!-- Connecting to CSS file -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
 
-    {% for message in messages %}
-        <script>
-            alert(`${message}`)
-        </script>
-    {% endfor %}
-
 </head>
 <body>
+    {% for message in messages %}
+        <h5>{{message}}</h5>
+    {% endfor %}
     <div class="container">
         <h1>Sign Up Below</h1>
         <form method="POST">
@@ -26,32 +23,32 @@
             <div class="top">
                 <div>
                     <label>First Name</label>
-                    {{form.First_Name}}
-                </div>
-                <br><br>
-                <div>
-                    <label>Middle Name</label>
-                    {{form.Middle_Name}}
+                    {{form.first_name}}
                 </div>
                 <br><br>
                 <div>
                     <label>Last Name</label>
-                    {{form.Last_Name}}
+                    {{form.last_name}}
+                </div>
+                <br><br>
+                <div>
+                    <label>Username</label>
+                    {{form.username}}
                 </div>
                 <br><br>
                 <div>
                     <label>Email</label>
-                    {{form.Email}}
+                    {{form.email}}
                 </div>
                 <br><br>
                 <div>
                     <label>Password</label>
-                    {{form.Password}}
+                    {{form.password1}}
                 </div>
                 <br><br>
                 <div>
                     <label>Repeat Password</label>
-                    {{form.Password2}}
+                    {{form.password2}}
                 </div>
                 <br><br>
             </div>

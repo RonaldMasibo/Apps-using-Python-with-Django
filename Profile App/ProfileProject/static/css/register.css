@@ -73,6 +73,7 @@ form{
     background-color: rgb(5, 29, 5);
     margin-left: 10px;
     margin-bottom: 5px;
+    padding: 10px;
     border: none;
     cursor: pointer;
     transition: all 1s;
@@ -85,7 +86,7 @@ form{
     bottom: 3px;
 }
 
-button a{
+a button{
     color: white;
     font-weight: bolder;
     text-decoration-line: none;

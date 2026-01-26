@@ -1,2 +1,93 @@
 
 
+body{
+    background-color: rgb(158, 156, 156);
+    background-image: linear-gradient(to right, rgb(158, 156, 156), rgb(196, 185, 185));
+}
+
+.container{
+    border-radius: 10px;
+    box-shadow: 2px 2px rgb(50, 52, 53);
+    background-color: white;
+    width: 600px;
+    margin: auto;
+    position: relative;
+    top: 30px;
+}
+
+h2{
+    text-align: center;
+    font-weight: bold;
+}
+
+h5{
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+.top > div{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px;
+    font-weight: bolder;
+}
+
+.top input{
+    width: 250px;
+}
+
+.bottom{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.bottom input{
+    width: 150px;
+    margin-bottom: 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    background-color: rgb(5, 29, 5);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 1s;
+}
+
+.bottom input:hover{
+    text-shadow: 1px 1px 1px white;
+    position: relative;
+    bottom: 3px;
+    background-color: black;
+}
+
+.bottom button{
+    border-radius: 15px;
+    width: 150px;
+    background-color: rgb(5, 29, 5);
+    margin-left: 10px;
+    margin-bottom: 5px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 1s;
+}
+
+.bottom button:hover{
+    text-shadow: 1px 1px 1px white;
+    background-color: black;
+    position: relative;
+    bottom: 3px;
+}
+
+a button{
+    color: white;
+    font-weight: bolder;
+    text-decoration-line: none;
+}

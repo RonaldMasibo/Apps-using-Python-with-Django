@@ -2,17 +2,15 @@
 
 from django import forms
 
-
-class RegisteredUsersForm(forms.Form):
-    First_Name = forms.CharField(max_length=100)
-    Middle_Name = forms.CharField(max_length=100)
-    Last_Name = forms.CharField(max_length=100)
-    Email = forms.EmailField(max_length=50)
-    Password = forms.CharField(widget=forms.PasswordInput())
-    Password2 = forms.CharField(widget=forms.PasswordInput())
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 
-class LoginUsersForm(forms.Form):
-    First_Name = forms.CharField(max_length=100)
-    Email = forms.EmailField(max_length=50)
-    Password = forms.CharField(widget=forms.PasswordInput())
+class UserRegistrationForm(UserCreationForm):
+    first_name = forms.CharField(max_length=30)
+    last_name = forms.CharField(max_length=30)
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
