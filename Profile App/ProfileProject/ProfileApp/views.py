@@ -3,8 +3,11 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .forms import UserRegistrationForm
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.hashers import make_password # For making a hashed password
+
+# from django.contrib.auth.hashers import make_password # For making a hashed password
+
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import auth
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -53,7 +56,13 @@ def doLogin(request):
     form = AuthenticationForm()
         
     return render(request, 'login.html', {'form':form})
-    
+
+
+@login_required
+def doLogout(request):
+    auth.logout(request)
+    return redirect('/')
+
 
 @login_required
 def main(request):
