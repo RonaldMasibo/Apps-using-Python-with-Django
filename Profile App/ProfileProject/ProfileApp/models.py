@@ -7,7 +7,7 @@ class People(models.Model):
     f_name = models.CharField(max_length=40)
     m_name = models.CharField(max_length=40)
     l_name = models.CharField(max_length=40)
-    prof_img = models.ImageField(upload_to="media/")
+    prof_img = models.ImageField(upload_to="images/")
     phone_no = models.CharField(max_length=13)
 
     def __str__(self):

@@ -10,6 +10,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import auth
 from django.contrib.auth.decorators import login_required
 
+
+
 # Create your views here.
 
 def base(request):
@@ -48,7 +50,6 @@ def doLogin(request):
 
         if user is not None:
             form = login(request, user)
-            messages.success(request, f'Welcome {user.username} !!')
             return redirect('main')
         else:
             messages.info(request, f'The Account does not exist!!!')
@@ -70,5 +71,8 @@ def main(request):
     return render(request, 'home.html', {'welcoming_mess':welcome_message})
 
 
-#def profile(request)
-
+# Adding a profile
+@login_required
+def addProfile(request):
+    mess = "Oyaaaa!!!"
+    return render (request, {'mess':mess})

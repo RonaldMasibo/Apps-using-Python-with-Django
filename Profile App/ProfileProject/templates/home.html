@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
 
     <!-- Importing CloudFlare Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZb02noKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <title>Home</title>
 </head>
@@ -52,11 +52,60 @@
             <h3>{{welcoming_mess}}</h3>
             <p>This is an app for storing different profiles.</p>
         </div>
-        <div class="tabcontent" id="Tab2"></div>
-        <div class="tabcontent" id="Tab3"></div>
+        <div class="tabcontent" id="Tab2">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ipsum excepturi, laborum mollitia in, vero animi a fugit consequuntur soluta vitae ipsam velit tempore modi nulla repellat doloribus? Illum, provident!
+        </div>
+        <div class="tabcontent" id="Tab3">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet, ipsa impedit voluptas eius architecto voluptate nisi et perferendis quia unde illum quasi perspiciatis quibusdam fugiat, doloribus, expedita beatae quod similique!
+        </div>
     </div>
 
+
     <!-- JavaScript -->
-    <script></script>
+    <script>
+
+        // Initialize the bars icon
+        const toggleBtn = document.querySelector(".toggleBtn");
+
+        // Initialise the navigation bar
+        const links = document.querySelector(".links");
+
+        // Clicking the button to toggle the navigation bar
+        toggleBtn.addEventListener("click", ()=>{
+            if (links.classList.contains("active")){
+                links.classList.remove("active");
+            } else {
+                links.classList.add("active");
+            }
+        });
+
+
+        // JS code for the tabs and their content
+        function openTab(evt, TabNumber){
+            // Declare all variables
+            var i, tabcontent, tablinks;
+
+            // Get all elements with class="tabcontent" & hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++){
+                tabcontent[i].style.display = "none";
+            }
+
+            // Get all elements with class="tablinks" & remove class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i=0; i < tablinks.length; i++){
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            //Show the current tab & add an "active" class to the button that opened the tab
+            document.getElementById(TabNumber).style.display = "block";
+            evt.currentTarget.className += " active";
+
+        }
+
+        // Choosing the default tab that will be displayed
+        document.getElementById("defaultTab").click();
+
+    </script>
 </body>
 </html>
