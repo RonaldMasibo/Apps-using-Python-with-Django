@@ -129,5 +129,5 @@ def main(request):
             return redirect('main')
 
     welcome_message = f'Welcome {request.user}'
-    return render(request, 'home.html', {'welcoming_mess':welcome_message, 'people':People, 'no_people':People.count()})
+    return render(request, 'home.html', {'welcoming_mess':welcome_message, 'people':people, 'no_people':people.count()})
 

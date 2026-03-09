@@ -57,11 +57,49 @@
                 </div>
             </div>
         </div>
+
+        <!-- Adding (CREATE) People to the DB -->
         <div class="tabcontent" id="Tab2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ipsum excepturi, laborum mollitia in, vero animi a fugit consequuntur soluta vitae ipsam velit tempore modi nulla repellat doloribus? Illum, provident!
+            <div class="addPeople">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <label for="First_Name">First Name</label>
+                        <input type="text" name="first_name" id="First_Name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="Middle_Name">Middle Name</label>
+                        <input type="text" name="middle_name" id="Middle_Name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="Last_Name">Last Name</label>
+                        <input type="text" name="last_name" id="Last_Name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="Profile_Image">Upload Profile image</label>
+                        <input type="file" name="profile_img" id="Profile_Image" accept="image/*" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="Phone_Number">Phone Number</label>
+                        <input type="tel" name="phone_number" id="Phone_Number" required>
+                    </div>
+                    <button type="submit" name="add_people">ADD PERSON</button>
+                </form>
+            </div>
         </div>
         <div class="tabcontent" id="Tab3">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet, ipsa impedit voluptas eius architecto voluptate nisi et perferendis quia unde illum quasi perspiciatis quibusdam fugiat, doloribus, expedita beatae quod similique!
+            {% for person in people %}
+                <div class="view-People">
+                    <div class="left-info">
+                        {{ person.prof_img }}
+                    </div>
+                    <div class="right-info">
+                        <p>{{person.l_name}}, {{person.f_name}} {{person.m_name}}</p>
+                        <br>
+                        <p>{{person.phone_no}}</p>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 
