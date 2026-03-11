@@ -67,7 +67,7 @@ def doLogout(request):
 
 
 @login_required
-def main(request):
+def main(request, id):
 
     # Every single person being stored in the DB
     people = People.objects.all()
@@ -78,45 +78,36 @@ def main(request):
         form = PersonForm(request.POST, request.FILES)
 
         # Add People
-        if "add_people" in form:
+        if "add_people" in request.POST:
             if form.is_valid():
                 form.save()
                 return redirect('main')
         
         # Edit People
-        """if "edit_people" in request.POST:
+        if "edit_people" in request.POST:
 
-            # Retrieving updated details on People
-            people_id = request.POST.get('people_id')
-            new_fname = request.POST.get('new_fname')
-            new_mname = request.POST.get('new_mname')
-            new_lname = request.POST.get('new_lname')
-            new_image = request.FILES.get('new_image')
-            new_phoneNo = request.POST.get('new_phoneNo')
+            # Fetch the object related to the passed ID
+            obj = get_object_or_404(People, id)
 
-            # Saving updated details on the DB
-            updated_person = get_object_or_404(People, id=people_id)
-            updated_person.f_name = new_fname
-            updated_person.m_name = new_mname
-            updated_person.l_name = new_lname
-            updated_person.prof_img = new_image
-            updated_person.phone_no = new_phoneNo
-            updated_person.save()
+            # Pass the object as an instance in form
+            form = PersonForm(request.POST, request.FILES, instance=obj)
 
-            return redirect('main')
+            # Save the edited info
+            if form.is_valid():
+                form.save()
+                return redirect('main')
         
         # Delete People
         if "delete_people" in request.POST:
-            people_id = request.POST.get('people_id')
-            person = get_object_or_404(People, id=people_id)
-            person.delete()
+            obj = get_object_or_404(People, id=id)
+            obj.delete()
             return redirect('main')
         
         # Delete EVERYTHING at once
         if "delete_all" in request.POST:
             People.objects.all().delete()
             return redirect('main')
-"""
+
     else:
         form = PersonForm()
     
