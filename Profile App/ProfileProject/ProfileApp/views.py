@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import People
 from django.http import HttpResponse
 from django.contrib import messages
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, PersonForm
 from django.contrib.auth.forms import AuthenticationForm
 
 # from django.contrib.auth.hashers import make_password # For making a hashed password
@@ -73,36 +73,25 @@ def main(request):
     people = People.objects.all()
 
     if request.method == "POST":
+
+        # Creating instance of model form
+        form = PersonForm(request.POST, request.FILES)
+
         # Add People
-        if "add_people" in request.POST:
-
-            # Retrieve inputs from the HTML form
-            f_name = request.POST.get('first_name')
-            m_name = request.POST.get('middle_name')
-            l_name = request.POST.get('last_name')
-            prof_img = request.POST.get('profile_img')
-            phone_no = request.POST.get('phone_number')
-            
-            # Save contents into the DB
-            People.objects.create(
-                f_name = f_name,
-                m_name = m_name,
-                l_name = l_name,
-                prof_img = prof_img,
-                phone_no = phone_no,
-            )
-
-            return redirect('main')
+        if "add_people" in form:
+            if form.is_valid():
+                form.save()
+                return redirect('main')
         
         # Edit People
-        if "edit_people" in request.POST:
+        """if "edit_people" in request.POST:
 
             # Retrieving updated details on People
             people_id = request.POST.get('people_id')
             new_fname = request.POST.get('new_fname')
             new_mname = request.POST.get('new_mname')
             new_lname = request.POST.get('new_lname')
-            new_image = request.POST.get('new_image')
+            new_image = request.FILES.get('new_image')
             new_phoneNo = request.POST.get('new_phoneNo')
 
             # Saving updated details on the DB
@@ -127,7 +116,15 @@ def main(request):
         if "delete_all" in request.POST:
             People.objects.all().delete()
             return redirect('main')
-
+"""
+    else:
+        form = PersonForm()
+    
     welcome_message = f'Welcome {request.user}'
-    return render(request, 'home.html', {'welcoming_mess':welcome_message, 'people':people, 'no_people':people.count()})
+    return render(request, 'home.html', {
+        'welcoming_mess':welcome_message, 
+        'people':people, 
+        'person_form':form,
+        'no_people':people.count()
+    })
 

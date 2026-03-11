@@ -61,27 +61,28 @@
         <!-- Adding (CREATE) People to the DB -->
         <div class="tabcontent" id="Tab2">
             <div class="addPeople">
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="input-group">
-                        <label for="First_Name">First Name</label>
-                        <input type="text" name="first_name" id="First_Name" required>
+                        <label>First Name</label>
+                        {{person_form.f_name}}
                     </div>
                     <div class="input-group">
-                        <label for="Middle_Name">Middle Name</label>
-                        <input type="text" name="middle_name" id="Middle_Name" required>
+                        <label>Middle Name</label>
+                        {{person_form.m_name}}
                     </div>
                     <div class="input-group">
-                        <label for="Last_Name">Last Name</label>
-                        <input type="text" name="last_name" id="Last_Name" required>
+                        <label>Last Name</label>
+                        {{person_form.l_name}}
                     </div>
                     <div class="input-group">
-                        <label for="Profile_Image">Upload Profile image</label>
-                        <input type="file" name="profile_img" id="Profile_Image" accept="image/*" required>
+                        <label>Upload Profile image</label>
+                        <!-- <input type="file" name="profile_img" id="Profile_Image" accept="image/*" required> -->
+                        {{person_form.prof_img}}
                     </div>
                     <div class="input-group">
-                        <label for="Phone_Number">Phone Number</label>
-                        <input type="tel" name="phone_number" id="Phone_Number" required>
+                        <label>Phone Number</label>
+                        {{person_form.phone_no}}
                     </div>
                     <button type="submit" name="add_people">ADD PERSON</button>
                 </form>
@@ -91,12 +92,23 @@
             {% for person in people %}
                 <div class="view-People">
                     <div class="left-info">
-                        {{ person.prof_img }}
+                        <img src="{{ person.prof_img.url }}" alt="Profile Image" style="width: 100%;">
                     </div>
                     <div class="right-info">
-                        <p>{{person.l_name}}, {{person.f_name}} {{person.m_name}}</p>
-                        <br>
-                        <p>{{person.phone_no}}</p>
+                        <table>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Middle Name</th>
+                                <th>Last Name</th>
+                                <th>Phone Number</th>
+                            </tr>
+                            <tr>
+                                <td>{{ person.f_name }}</td>
+                                <td>{{ person.m_name }}</td>
+                                <td>{{ person.l_name }}</td>
+                                <td>{{ person.phone_no }}</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             {% endfor %}

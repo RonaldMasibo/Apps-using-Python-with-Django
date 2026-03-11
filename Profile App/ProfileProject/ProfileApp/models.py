@@ -8,7 +8,7 @@ class People(models.Model):
     m_name = models.CharField(max_length=40)
     l_name = models.CharField(max_length=40)
     prof_img = models.ImageField(upload_to="images/")
-    phone_no = models.CharField(max_length=13)
+    phone_no = models.IntegerField()
 
     def __str__(self):
         return f"Welcome {self.f_name} to your app for storing different profiles!!!"
