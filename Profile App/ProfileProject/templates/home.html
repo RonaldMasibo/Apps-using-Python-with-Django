@@ -77,7 +77,6 @@
                     </div>
                     <div class="input-group">
                         <label>Upload Profile image</label>
-                        <!-- <input type="file" name="profile_img" id="Profile_Image" accept="image/*" required> -->
                         {{person_form.prof_img}}
                     </div>
                     <div class="input-group">
@@ -88,6 +87,8 @@
                 </form>
             </div>
         </div>
+
+        <!-- Viewing (READ) People whose info have been stored -->
         <div class="tabcontent" id="Tab3">
             {% for person in people %}
                 <div class="view-People">
@@ -111,9 +112,58 @@
                                 <td>{{ person.phone_no }}</td>
                             </tr>
                         </table>
+                        <div class="btns">
+                            <div class="edit_section">
+                                <button type="button" class="edit_btn" onclick="enable_edit({{ person.id }})">Edit Info</button>
+                                <br>
+                                <!-- Edit form -->
+                                <form method="POST" enctype="multipart/form-data" class="edit_form" style="display: none;">
+                                    {% csrf_token %}
+                                    <!-- Getting the ID of the person -->
+                                    <div class="input-group">
+                                        <input type="hidden" name="person_id" value="{{person.id}}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Update First Name</label>
+                                        {{person_form.f_name}}
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Update Middle Name</label>
+                                        {{person_form.m_name}}
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Update Last Name</label>
+                                        {{person_form.l_name}}
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Update Profile image</label>
+                                        {{person_form.prof_img}}
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Phone Number</label>
+                                        {{person_form.phone_no}}
+                                    </div>
+                                    <button type="submit" name="edit_people">UPDATE PERSON INFO</button>
+                                </form>
+                            </div>
+                            <div class="del_section">
+                                <form enctype="multipart/form-data" method="POST">
+                                    {% csrf_token %}
+
+                                    <!-- Getting the ID of the person to be deleted -->
+                                    <input type="hidden" name="person_id" value="{{person.id}}">
+
+                                    <button type="submit" name="delete_person" class="del_btn">DELETE PERSON</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             {% endfor %}
+            <form enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                <button type="submit" name="delete_all" class="del_all_btn">DELETE EVERY RECORD</button>
+            </form>
         </div>
     </div>
 

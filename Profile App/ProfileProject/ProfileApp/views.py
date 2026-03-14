@@ -67,7 +67,7 @@ def doLogout(request):
 
 
 @login_required
-def main(request, id):
+def main(request):
 
     # Every single person being stored in the DB
     people = People.objects.all()
@@ -84,10 +84,13 @@ def main(request, id):
                 return redirect('main')
         
         # Edit People
-        if "edit_people" in request.POST:
+        elif "edit_people" in request.POST:
 
+            # Get the ID of the person first
+            person_id = request.POST.get("person_id")
+            
             # Fetch the object related to the passed ID
-            obj = get_object_or_404(People, id)
+            obj = get_object_or_404(People, id=person_id)
 
             # Pass the object as an instance in form
             form = PersonForm(request.POST, request.FILES, instance=obj)
@@ -98,14 +101,17 @@ def main(request, id):
                 return redirect('main')
         
         # Delete People
-        if "delete_people" in request.POST:
-            obj = get_object_or_404(People, id=id)
+        elif "delete_person" in request.POST:
+            # Get the ID of the person first
+            person_id = request.POST.get("person_id")
+            
+            obj = get_object_or_404(People, id=person_id)
             obj.delete()
             return redirect('main')
         
         # Delete EVERYTHING at once
-        if "delete_all" in request.POST:
-            People.objects.all().delete()
+        elif "delete_all" in request.POST:
+            people.delete()
             return redirect('main')
 
     else:
