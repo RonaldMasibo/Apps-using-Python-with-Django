@@ -117,7 +117,7 @@
                                 <button type="button" class="edit_btn" onclick="enable_edit({{ person.id }})">Edit Info</button>
                                 <br>
                                 <!-- Edit form -->
-                                <form method="POST" enctype="multipart/form-data" class="edit_form" style="display: none;">
+                                <form method="POST" enctype="multipart/form-data" class="edit_form" style="display: none;" id="edit-{{person.id}}">
                                     {% csrf_token %}
                                     <!-- Getting the ID of the person -->
                                     <div class="input-group">
@@ -125,23 +125,23 @@
                                     </div>
                                     <div class="input-group">
                                         <label>Update First Name</label>
-                                        {{person_form.f_name}}
+                                        <input type="text" name="f_name" value="{{person.f_name}}">
                                     </div>
                                     <div class="input-group">
                                         <label>Update Middle Name</label>
-                                        {{person_form.m_name}}
+                                        <input type="text" name="m_name" value="{{person.m_name}}">
                                     </div>
                                     <div class="input-group">
                                         <label>Update Last Name</label>
-                                        {{person_form.l_name}}
+                                        <input type="text" name="l_name" value="{{person.l_name}}">
                                     </div>
                                     <div class="input-group">
                                         <label>Update Profile image</label>
-                                        {{person_form.prof_img}}
+                                        <input type="file" name="prof_img" value="{{person.prof_img}}" accept="image/*">
                                     </div>
                                     <div class="input-group">
                                         <label>Phone Number</label>
-                                        {{person_form.phone_no}}
+                                        <input type="tel" name="phone_no" value="{{person.phone_no}}">
                                     </div>
                                     <button type="submit" name="edit_people">UPDATE PERSON INFO</button>
                                 </form>
@@ -212,6 +212,11 @@
 
         // Choosing the default tab that will be displayed
         document.getElementById("defaultTab").click();
+
+        // Function to enable editing of a person's data
+        function enable_edit(id) {
+            document.getElementById("edit-" + id).style.display = "flex";
+        }
 
     </script>
 </body>

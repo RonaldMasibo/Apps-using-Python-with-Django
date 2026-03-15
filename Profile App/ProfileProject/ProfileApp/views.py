@@ -84,24 +84,34 @@ def main(request):
                 return redirect('main')
         
         # Edit People
-        elif "edit_people" in request.POST:
+        if "edit_people" in request.POST:
 
             # Get the ID of the person first
             person_id = request.POST.get("person_id")
+
+            # Get the details of the update form
+            new_fname = request.POST.get("f_name")
+            new_mname = request.POST.get("m_name")
+            new_lname = request.POST.get("l_name")
+            new_profImg = request.FILES.get("prof_img")
+            new_phoneNo = request.POST.get("phone_no")
             
             # Fetch the object related to the passed ID
             obj = get_object_or_404(People, id=person_id)
 
-            # Pass the object as an instance in form
-            form = PersonForm(request.POST, request.FILES, instance=obj)
-
             # Save the edited info
-            if form.is_valid():
-                form.save()
-                return redirect('main')
+            obj.f_name = new_fname
+            obj.m_name = new_mname
+            obj.l_name = new_lname
+            obj.phone_no = new_phoneNo
+            if obj.prof_img:
+                obj.prof_img = new_profImg
+            obj.save()
+
+            return redirect('main')
         
         # Delete People
-        elif "delete_person" in request.POST:
+        if "delete_person" in request.POST:
             # Get the ID of the person first
             person_id = request.POST.get("person_id")
             
@@ -110,12 +120,11 @@ def main(request):
             return redirect('main')
         
         # Delete EVERYTHING at once
-        elif "delete_all" in request.POST:
+        if "delete_all" in request.POST:
             people.delete()
             return redirect('main')
 
-    else:
-        form = PersonForm()
+    form = PersonForm()
     
     welcome_message = f'Welcome {request.user}'
     return render(request, 'home.html', {
