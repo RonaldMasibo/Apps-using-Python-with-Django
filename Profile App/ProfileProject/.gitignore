@@ -4,3 +4,6 @@ settings.py
 
 # Ignoring the environment
 myenv/
+
+# Ignoring the media images being stored
+media/

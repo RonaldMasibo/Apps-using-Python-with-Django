@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- CSS file -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}?v=1.1">
 
     <!-- Importing CloudFlare Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -49,11 +49,11 @@
 
         <!-- Tab Content -->
         <div class="tabcontent" id="Tab1">
-            <h3>{{welcoming_mess}}</h3>
+            <h3 style="text-align: center;">{{welcoming_mess}}</h3>
             <div class="dashboard">
                 <div class="info1">
                     <h3>{{no_people}}</h3>
-                    <p>Total Number of People</p>
+                    <p>People<br>Registered</p>
                 </div>
             </div>
         </div>
@@ -83,7 +83,9 @@
                         <label>Phone Number</label>
                         {{person_form.phone_no}}
                     </div>
-                    <button type="submit" name="add_people">ADD PERSON</button>
+                    <div class="submitbtn">
+                        <button type="submit" name="add_people">ADD&nbsp;&nbsp;PERSON</button>
+                    </div>
                 </form>
             </div>
         </div>
