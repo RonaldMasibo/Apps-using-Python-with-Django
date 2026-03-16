@@ -6,4 +6,4 @@ settings.py
 myenv/
 
 # Ignoring the media images being stored
-media/
+images/

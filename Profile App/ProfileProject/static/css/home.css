@@ -224,3 +224,8 @@ label{
     font-weight: bolder;
     box-shadow: 2px 2px black;
 }
+
+.view-People{
+    display: flex;
+    flex-direction: row;
+}
