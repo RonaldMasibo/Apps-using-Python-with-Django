@@ -1,0 +1,69 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index.css' %}?v=1.1">
+
+    <title>Home</title>
+</head>
+<body>
+    <!-- Main content -->
+    <div class="main">
+        <!-- The left side of the content -->
+        <div class="left">
+            <div class="top">
+                <h2>Continue Analysing</h2>
+            </div>
+            <div class="bottom">
+                <p>Do you have an account</p>
+                <p style="margin-bottom: 40px;">for tracking your expenses??</p>
+                <a href="{% url 'login' %}">Log In</a>
+            </div>
+        </div>
+        <!-- The right side of the content -->
+        <div class="right">
+            <div>
+                <h2>Create account</h2>
+            </div>
+            <div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div>
+                        <label for="UserName">Enter Your Username</label>
+                        <input type="text" name="Uname" id="UserName" required>
+                    </div>
+                    <div>
+                        <label for="FirstName">Enter Your First Name</label>
+                        <input type="text" name="Fname" id="FirstName" placeholder="John" required>
+                    </div>
+                    <div>
+                        <label for="LastName">Enter Your Last Name</label>
+                        <input type="text" name="Lname" id="LastName" placeholder="Doe" required>
+                    </div>
+                    <div>
+                        <label for="E-mail">Enter Your Email Address</label>
+                        <input type="email" name="Email" id="E-mail" placeholder="youremail@example.com" required>
+                    </div>
+                    <div>
+                        <label for="Pword1">Enter Your Password</label>
+                        <input type="password" name="Password1" id="Pword1" required>
+                    </div>
+                    <div>
+                        <label for="Pword2">Enter Your Password Again</label>
+                        <input type="password" name="Password2" id="Pword2" required>
+                    </div>
+                    <div>
+                        <button type="submit">Sign Up</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

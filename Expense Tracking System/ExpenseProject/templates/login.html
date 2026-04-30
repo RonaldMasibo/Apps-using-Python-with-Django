@@ -1,0 +1,52 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login.css' %}?v=1.1">
+
+    <title>Log In Page</title>
+</head>
+<body>
+    <!-- Main content -->
+    <div class="main">
+        <!-- The left side of the content -->
+        <div class="left">
+            <div class="top">
+                <h2>Get Started!!</h2>
+            </div>
+            <div class="bottom">
+                <p style="margin-bottom: 40px;">Don't have an account??</p>
+                <a href="{% url 'index' %}">Sign Up</a>
+            </div>
+        </div>
+        <!-- The right side of the content -->
+        <div class="right">
+            <div>
+                <h2>Log In to your account</h2>
+            </div>
+            <div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div>
+                        <label for="E-mail">Enter Your Email Address</label>
+                        <input type="email" name="Email" id="E-mail" placeholder="youremail@example.com" required>
+                    </div>
+                    <div>
+                        <label for="Pword">Enter Your Password</label>
+                        <input type="password" name="Password" id="Pword" required>
+                    </div>
+                    <div>
+                        <button type="submit">Log In</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
