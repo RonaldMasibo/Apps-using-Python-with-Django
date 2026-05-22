@@ -40,7 +40,28 @@
 
         <!-- Tab Content -->
         <div class="tabcontent" id="Tab1">
-            <h2>asceqcew</h2>
+            <div class="top2">
+                <div class="top2-A">
+                    <div class="top2-A-Content">
+                        <div class="top2-A-Inc">
+                            <h3>Categories with highest Income</h3>
+                            <div class="income-viewing"></div>
+                        </div>
+                        <div class="top2-A-Exp">
+                            <h3>Categories with highest Expenses</h3>
+                            <div class="expense-viewing"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="top2-B">
+                    <div class="top2-B-content"></div>
+                    <div class="top2-B-Viewing">
+                        <div class="viewingIncomeTable"></div>
+                        <div class="viewingExpensesTable"></div>
+                    </div>
+                </div>
+                <div class="top2-C"></div>
+            </div>
         </div>
 
         <div class="tabcontent" id="Tab2">
@@ -55,5 +76,26 @@
             <h2>dcvewcecewc</h2>
         </div>
     </div>
+
+    <!-- JS code for drawing the chart -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                datasets: [{
+                    data: {{data|safe}},
+                    label: 'Label'
+                }],
+                labels: {{labels|safe}}
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script> -->
 </body>
 </html>

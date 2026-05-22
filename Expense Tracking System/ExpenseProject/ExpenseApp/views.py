@@ -1,3 +1,4 @@
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
@@ -102,7 +103,6 @@ def calculating(request):
             obj.IncomeDate = newIncomeDate
             obj.save()
 
-
         # Adding Expenses
         if "add_expense" in request.POST:
             # Get fields for Expenses
@@ -157,5 +157,17 @@ def calculating(request):
         )
         TotalsDetails.save()
 
-    return render(request, 'calc.html')
+        # For displaying a chart
+        labels = []
+        data = []
+
+        querySet = income.objects.order_by('-IncomeAmount')
+        for eachIncome in querySet:
+            labels.append(eachIncome.IncomeDate)
+            data.append(eachIncome.IncomeAmount)
+
+    return render(request, 'calc.html', {
+        'labels':labels,
+        'data':data
+    })
 
