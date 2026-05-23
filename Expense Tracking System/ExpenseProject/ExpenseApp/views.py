@@ -157,17 +157,5 @@ def calculating(request):
         )
         TotalsDetails.save()
 
-        # For displaying a chart
-        labels = []
-        data = []
-
-        querySet = income.objects.order_by('-IncomeAmount')
-        for eachIncome in querySet:
-            labels.append(eachIncome.IncomeDate)
-            data.append(eachIncome.IncomeAmount)
-
-    return render(request, 'calc.html', {
-        'labels':labels,
-        'data':data
-    })
+    return render(request, 'calc.html')
 

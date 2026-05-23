@@ -14,16 +14,19 @@
     <title>Calculating Budget</title>
 </head>
 <body>
+
+    <div class="top1-A">
+        <h1 style="font-size: 20px;">The PesaPlan Application</h1>
+        <p>Be in control of your finaces</p>
+    </div>
+
     <!-- The main content -->
     <div class="main">
         <div class="top1">
-            <div class="top1-A">
-                <h1 style="font-size: 20px;">PesaPlan App</h1>
-            </div>
             <div class="tab">
                 <ul>
                     <li>
-                        <a href="#" class="tablinks">Cash Flow</a>
+                        <a href="#" class="tablinks">Dashboard</a>
                     </li>
                     <li>
                         <a href="#" class="tablinks">Income</a>
@@ -35,6 +38,8 @@
                         <a href="#" class="tablinks">Savings</a>
                     </li>
                 </ul>
+                <!-- For logging out -->
+                <div class="logoutbtn"></div>
             </div>
         </div>
 
@@ -42,30 +47,38 @@
         <div class="tabcontent" id="Tab1">
             <div class="top2">
                 <div class="top2-A">
-                    <div class="top2-A-Content">
-                        <div class="top2-A-Inc">
-                            <h3>Categories with highest Income</h3>
-                            <div class="income-viewing"></div>
-                        </div>
-                        <div class="top2-A-Exp">
-                            <h3>Categories with highest Expenses</h3>
-                            <div class="expense-viewing"></div>
-                        </div>
+                    <!-- The numbers -->
+                    <div>
+                        <p>Total Balance left</p>
+                        <p id="BalanceAmount"></p>
+                        <p>This month</p>
+                    </div>
+                    <div>
+                        <p>Total Income</p>
+                        <p id="IncomeAmount"></p>
+                        <p>This month</p>
+                    </div>
+                    <div>
+                        <p>Total Expenses</p>
+                        <p id="ExpensesAmount"></p>
+                        <p>This month</p>
+                    </div>
+                    <div>
+                        <p>Savings Rate</p>
+                        <p id="SavingsRate"></p>
+                        <p>This month</p>
                     </div>
                 </div>
                 <div class="top2-B">
-                    <div class="top2-B-content"></div>
-                    <div class="top2-B-Viewing">
-                        <div class="viewingIncomeTable"></div>
-                        <div class="viewingExpensesTable"></div>
-                    </div>
+                    <!-- The Charts -->
+                    <div class="barChart"></div>
+                    <div class="lineChart"></div>
                 </div>
-                <div class="top2-C"></div>
             </div>
         </div>
 
         <div class="tabcontent" id="Tab2">
-            <h2>cadscec</h2>
+            <h3>scdcsdcewdd</h3>
         </div>
 
         <div class="tabcontent" id="Tab3">
@@ -76,26 +89,5 @@
             <h2>dcvewcecewc</h2>
         </div>
     </div>
-
-    <!-- JS code for drawing the chart -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-
-    <script>
-        const ctx = document.getElementById('myChart');
-
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                datasets: [{
-                    data: {{data|safe}},
-                    label: 'Label'
-                }],
-                labels: {{labels|safe}}
-            },
-            options: {
-                responsive: true
-            }
-        });
-    </script> -->
 </body>
 </html>
