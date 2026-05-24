@@ -9,4 +9,3 @@ urlpatterns = [
     path('calculating',views.calculating, name='calculating'),
 ]
 
-
