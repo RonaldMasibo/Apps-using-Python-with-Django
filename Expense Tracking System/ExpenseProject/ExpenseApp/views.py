@@ -245,12 +245,6 @@ def calculating(request):
             obj = get_object_or_404(expenses, id = expenses_ID)
             obj.delete()
         
-        
-        # Get total for all expenses & income with their respective dates
-        totalExp = expenses.objects.aggregate(total_amount = Sum('ExpensesAmount'))
-        totalInc = income.objects.aggregate(total_amount = Sum('IncomeAmount'))
-        latestExpDate = request.POST.get('latestExpDate') # Get the latest date for expenses
-        latestIncDate = request.POST.get('latestIncDate') # Get the latest date for Income
 
         # For drawing charts
         year_input = request.POST.get('year', '').strip()
@@ -306,13 +300,28 @@ def calculating(request):
                         incomeChart_labels = month_names
                         incomeChart_data = [income_by_month.get(m, 0) for m in range(1, 13)]
 
+    # Get total for all expenses, income and balance for the selected year
+    totalExp = expenses.objects.filter(date__year = selected_yr).aggregate(total_amount = Sum('ExpensesAmount'))
+    totalInc = income.objects.filter(date__year = selected_yr).aggregate(total_amount = Sum('IncomeAmount'))
+    """latestExpDate = request.POST.get('latestExpDate') # Get the latest date for expenses
+    latestIncDate = request.POST.get('latestIncDate') # Get the latest date for Income"""
+    totalBalance = totalInc - totalExp
+
     context = {
+        'currentBalance': totalBalance,
+        'totalIncome': totalInc,
+        'totalExpenses': totalExp,
+
+        # json.dumps() converts Python lists to JSON for chart.js to read
         'expenses_labels': json.dumps(expensesChart_labels),
+        'income_labels': json.dumps(incomeChart_labels),
         'expenses_data': json.dumps(expensesChart_data),
+        'income_data': json.dumps(incomeChart_data),
+        'availableYears_Income': availableIncomeYears,
+        'availableYears_Expenses': availableExpensesYears,
         'selected_yr': selected_yr,
         'error': error
     }
 
-    return render(request, 'calc.html',)
-
+    return render(request, 'calc.html', context)
 

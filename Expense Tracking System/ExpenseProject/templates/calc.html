@@ -34,9 +34,6 @@
                     <li>
                         <a href="#" class="tablinks">Expenses</a>
                     </li>
-                    <li>
-                        <a href="#" class="tablinks">Savings</a>
-                    </li>
                 </ul>
                 <!-- For logging out -->
                 <div class="logoutbtn">
@@ -51,33 +48,56 @@
         <!-- Tab Content -->
         <div class="tabcontent" id="Tab1">
             <div class="top2">
+                <!-- For Selecting the Year -->
                 <div class="top2-A">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <label for="year"><strong>Select Year</strong></label>
+                        <select name="year" id="year">
+                            <option value="">-- Select Year --</option>
+                            {% for year in availableYears_Expenses %}
+                                <option value="{{ year|date:'Y' }}">
+                                    {% if selected_yr == year|date:'Y'|add:0 %}selected{% endif %}
+                                    {{ year|date:"Y" }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit">Generate Info</button>
+                    </form>
+
+                    <!-- Error -->
+                    {% if error %}
+                        <p class="error">{{ error }}</p>
+                    {% endif %}
+                </div>
+                <div class="top2-B">
                     <!-- The numbers -->
                     <div>
                         <p>Total Balance left</p>
-                        <p id="BalanceAmount"></p>
+                        <p id="BalanceAmount">{{ currentBalance }}</p>
                         <p>This month</p>
                     </div>
                     <div>
                         <p>Total Income</p>
-                        <p id="IncomeAmount"></p>
+                        <p id="IncomeAmount">{{ totalIncome }}</p>
                         <p>This month</p>
                     </div>
                     <div>
                         <p>Total Expenses</p>
-                        <p id="ExpensesAmount"></p>
-                        <p>This month</p>
-                    </div>
-                    <div>
-                        <p>Savings Rate</p>
-                        <p id="SavingsRate"></p>
+                        <p id="ExpensesAmount">{{ totalExpenses }}</p>
                         <p>This month</p>
                     </div>
                 </div>
-                <div class="top2-B">
+                <div class="top2-C">
                     <!-- The Charts -->
-                    <div class="barChart"></div>
-                    <div class="lineChart"></div>
+                    {% if expenses_data %}
+                        <div class="ExpensesbarChart" style="width: 50%;">
+                            <canvas id="expenseChart"></canvas>
+                        </div>
+                    {% endif %}
+                    {% if income_data %}
+                        <div class="IncomelineChart" style="width: 50%;"></div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -91,14 +111,46 @@
         <div class="tabcontent" id="Tab3">
             <h2>asceascewc</h2>
         </div>
-        
-        <!-- Tab for Savings -->
-        <div class="tabcontent" id="Tab4">
-            <h2>dcvewcecewc</h2>
-        </div>
     </div>
 
     <!-- JS code -->
-    <script></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    <script>
+        // For Expenses first
+        const expenseLabels = {{ expenses_labels|safe }};
+        const expenseData = {{ expenses_data|safe }};
+
+        const ctx1 = document.getElementById("expenseChart");
+
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: expenseLabels,
+                datasets: [{
+                    label: 'Monthly Expenses - {{ selected_yr }}',
+                    data: expenseData,
+                    backgroundColor: 'lightblue'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Monthly Expenses for {{ selected_yr }}',
+                        font: { size: 10}
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // For Income
+    </script>
 </body>
 </html>

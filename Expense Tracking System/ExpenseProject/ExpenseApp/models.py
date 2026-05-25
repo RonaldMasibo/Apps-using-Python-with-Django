@@ -41,5 +41,3 @@ class expenses(models.Model):
         return f"{self.ExpensesCategory} : {self.ExpensesAmount}"
 
 
-
-
