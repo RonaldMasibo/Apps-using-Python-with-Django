@@ -41,12 +41,5 @@ class expenses(models.Model):
         return f"{self.ExpensesCategory} : {self.ExpensesAmount}"
 
 
-class totals(models.Model):
-    TotalIncome = models.DecimalField(max_digits=10, decimal_places=2)
-    TotalExpenses = models.DecimalField(max_digits=10, decimal_places=2)
-    LatestTotalInc_As_of = models.DateField()
-    LatestTotalExp_As_of = models.DateField()
 
-    def __str__(self):
-        return f"Total Income Amount {self.TotalIncome} : Total Expenses Amount {self.TotalExpenses}"
 

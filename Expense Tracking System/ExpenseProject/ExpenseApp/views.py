@@ -1,9 +1,15 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User, auth
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import * # Importing ALL the models
 from django.db.models import Sum, Count, Avg, Max, Min # For calculating the total values needed
+
+# For generating charts
+from django.db.models.functions import TruncMonth
+from django.utils import timezone
+import json
 
 
 # Create your views here.
@@ -60,8 +66,31 @@ def login(request):
     else:
         return render(request, 'login.html')
 
+# @login_required
+def logout(request):
+    auth.logout(request)
+    return redirect('login')
 
+# @login_required
 def calculating(request):
+
+    # For the charts
+    current_yr = timezone.now().year
+    selected_yr = None
+    expensesChart_labels = []
+    expensesChart_data = []
+    incomeChart_labels = []
+    incomeChart_data = []
+    error = None
+    
+    month_names = [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug',
+        'Sep', 'Oct', 'Nov', 'Dec'
+    ]
+
+    # Populate dropdown menu with the years that have Income and Expenses
+    availableIncomeYears = income.objects.dates('IncomeDate', 'year', order='DESC')
+    availableExpensesYears = expenses.objects.dates('ExpensesDate', 'year', order='DESC')
 
     if request.method == 'POST':
         # Adding an income category
@@ -223,16 +252,67 @@ def calculating(request):
         latestExpDate = request.POST.get('latestExpDate') # Get the latest date for expenses
         latestIncDate = request.POST.get('latestIncDate') # Get the latest date for Income
 
-        # Adding totals to the database
-        TotalsDetails = totals.objects.create(
-            TotalIncome = totalInc,
-            TotalExpenses = totalExp,
-            LatestTotalInc_As_of = latestIncDate,
-            LatestTotalExp_As_of = latestExpDate
-        )
-        TotalsDetails.save()
+        # For drawing charts
+        year_input = request.POST.get('year', '').strip()
 
-    return render(request, 'calc.html',{
-        'TotalBalance': TotalsDetails.TotalIncome - TotalsDetails.TotalExpenses,
-    })
+        if not year_input.isdigit():
+            error = "Please select a valid year"
+        else:
+            selected_yr = int(year_input)
+
+            if selected_yr < 2020 or selected_yr > current_yr:
+                error = f"The year selected must be between 2020 and {current_yr}"
+            else:
+                # Query to group expenses and income by month for the selected year
+                monthlyExpenses = (
+                    expenses.objects.filter(date__year = selected_yr)
+                    .annotate(month = TruncMonth('ExpensesDate'))
+                    .values('month')
+                    .annotate(total = Sum('ExpensesAmount'))
+                    .order_by('month')
+                )
+
+                monthlyIncome = (
+                    income.objects.filter(date__year = selected_yr)
+                    .annotate(month = TruncMonth('IncomeDate'))
+                    .values('month')
+                    .annotate(total = Sum('IncomeAmount'))
+                    .order_by('month')
+                )
+
+                if not monthlyExpenses.exists():
+                    error = f"No expenses found for the year {selected_yr}"
+                elif monthlyExpenses.exists():
+                    # Map month number to total
+                    expenses_by_month = {
+                        entry['month'].month: float(entry['total'])
+                        for entry in monthlyExpenses
+                    }
+
+                    # Fill all 12 months, 0 for months with no data
+                    expensesChart_labels = month_names
+                    expensesChart_data = [expenses_by_month.get(m, 0) for m in range(1, 13)]
+                else:
+                    if not monthlyIncome.exists():
+                        error = f"No income found for the year {selected_yr}"
+                    else:
+                        # Map month number to total
+                        income_by_month = {
+                            entry['month'].month: float(entry['total'])
+                            for entry in monthlyIncome
+                        }
+
+                        # Fill all 12 months, 0 for months with no data
+                        incomeChart_labels = month_names
+                        incomeChart_data = [income_by_month.get(m, 0) for m in range(1, 13)]
+
+    context = {
+        'expenses_labels': json.dumps(expensesChart_labels),
+        'expenses_data': json.dumps(expensesChart_data),
+        'selected_yr': selected_yr,
+        'error': error
+    }
+
+    return render(request, 'calc.html',)
+
 
