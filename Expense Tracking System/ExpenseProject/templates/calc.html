@@ -17,24 +17,16 @@
 
     <div class="top1-A">
         <h1 style="font-size: 20px;">The PesaPlan Application</h1>
-        <p>Be in control of your finaces</p>
+        <p>Be in control of your finances</p>
     </div>
 
     <!-- The main content -->
     <div class="main">
         <div class="top1">
             <div class="tab">
-                <ul>
-                    <li>
-                        <a href="#" class="tablinks">Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="#" class="tablinks">Income</a>
-                    </li>
-                    <li>
-                        <a href="#" class="tablinks">Expenses</a>
-                    </li>
-                </ul>
+                <button class="tablinks" id="tablinks1" onclick="openTab(event, 'Tab1')">Dashboard</button>
+                <button class="tablinks" onclick="openTab(event, 'Tab2')">Income</button>
+                <button class="tablinks" onclick="openTab(event, 'Tab3')">Expenses</button>
                 <!-- For logging out -->
                 <div class="logoutbtn">
                     <button type="button">
@@ -73,7 +65,7 @@
                 <div class="top2-B">
                     <!-- The numbers -->
                     <div>
-                        <p>Total Balance left</p>
+                        <p>Total Balance</p>
                         <p id="BalanceAmount">{{ currentBalance }}</p>
                         <p>This month</p>
                     </div>
@@ -96,7 +88,9 @@
                         </div>
                     {% endif %}
                     {% if income_data %}
-                        <div class="IncomelineChart" style="width: 50%;"></div>
+                        <div class="IncomelineChart" style="width: 50%;">
+                            <canvas id="incomeChart"></canvas>
+                        </div>
                     {% endif %}
                 </div>
             </div>
@@ -151,6 +145,84 @@
         });
 
         // For Income
+        const incomeLabels = {{ income_labels|safe }};
+        const incomeData = {{ income_data|safe }};
+
+        const ctx2 = document.getElementById("incomeChart");
+        
+        new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: incomeLabels,
+                datasets: [{
+                    label: 'Monthly Income {{ selected_yr }}',
+                    data: incomeData,
+                    backgroundColor: 'rgba(62, 149, 205, 0.15)', // Shaded area
+                    borderColor: 'rgba(62, 149, 205, 1)', // Line color
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(62, 149, 205, 1)', // Dot color
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Monthly Income for {{ selected_yr }}',
+                        font: {size: 10}
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false // Hide vertical grid lines
+                        }
+                    }
+                }
+            }
+        });
+
+
+
+        // For creating tabs and tablinks
+        function openTab(evt, TabNumber){
+
+            // Declare all variables
+            var i, tabcontent, tablinks
+
+            // Get all elements with class="tabcontent" & hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++){
+                tabcontent[i].style.display = "none";
+            }
+
+            // Get all elements with class="tablinks" & remove the "active" class
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++){
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // SHow the current tab & add an "active" class to the button that opened the tab
+            document.getElementById(TabNumber).style.display = "block";
+            evt.currentTarget.className += " active";
+        };
+
+        // Choosing the default tab that will be displayed
+        document.getElementById("tablinks1").click();
     </script>
+
 </body>
 </html>

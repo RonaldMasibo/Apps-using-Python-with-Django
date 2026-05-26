@@ -101,7 +101,7 @@ def calculating(request):
             incomeCategoryDetails = Incomecategories.objects.create(
                 forIncome = incomeCategory
             )
-            Incomecategories.save()
+            incomeCategoryDetails.save()
 
         # Editing an income category
         if "edit_income_category" in request.POST:
@@ -132,7 +132,7 @@ def calculating(request):
             expensesCategoryDetails = Expensescategories.objects.create(
                 forExpenses = expensesCategory
             )
-            expensesCategory.save()
+            expensesCategoryDetails.save()
 
         # Editing an Expense category
         if "edit_expense_category" in request.POST:
@@ -259,7 +259,7 @@ def calculating(request):
             else:
                 # Query to group expenses and income by month for the selected year
                 monthlyExpenses = (
-                    expenses.objects.filter(date__year = selected_yr)
+                    expenses.objects.filter(ExpensesDate__year = selected_yr)
                     .annotate(month = TruncMonth('ExpensesDate'))
                     .values('month')
                     .annotate(total = Sum('ExpensesAmount'))
@@ -267,16 +267,14 @@ def calculating(request):
                 )
 
                 monthlyIncome = (
-                    income.objects.filter(date__year = selected_yr)
+                    income.objects.filter(IncomeDate__year = selected_yr)
                     .annotate(month = TruncMonth('IncomeDate'))
                     .values('month')
                     .annotate(total = Sum('IncomeAmount'))
                     .order_by('month')
                 )
 
-                if not monthlyExpenses.exists():
-                    error = f"No expenses found for the year {selected_yr}"
-                elif monthlyExpenses.exists():
+                if monthlyExpenses.exists():
                     # Map month number to total
                     expenses_by_month = {
                         entry['month'].month: float(entry['total'])
@@ -286,23 +284,22 @@ def calculating(request):
                     # Fill all 12 months, 0 for months with no data
                     expensesChart_labels = month_names
                     expensesChart_data = [expenses_by_month.get(m, 0) for m in range(1, 13)]
-                else:
-                    if not monthlyIncome.exists():
-                        error = f"No income found for the year {selected_yr}"
-                    else:
-                        # Map month number to total
-                        income_by_month = {
-                            entry['month'].month: float(entry['total'])
-                            for entry in monthlyIncome
-                        }
 
-                        # Fill all 12 months, 0 for months with no data
-                        incomeChart_labels = month_names
-                        incomeChart_data = [income_by_month.get(m, 0) for m in range(1, 13)]
+                if monthlyIncome.exists():
+                    # Map month number to total
+                    income_by_month = {
+                        entry['month'].month: float(entry['total'])
+                        for entry in monthlyIncome
+                    }
+
+                    # Fill all 12 months, 0 for months with no data
+                    incomeChart_labels = month_names
+                    incomeChart_data = [income_by_month.get(m, 0) for m in range(1, 13)]
+
 
     # Get total for all expenses, income and balance for the selected year
-    totalExp = expenses.objects.filter(date__year = selected_yr).aggregate(total_amount = Sum('ExpensesAmount'))
-    totalInc = income.objects.filter(date__year = selected_yr).aggregate(total_amount = Sum('IncomeAmount'))
+    totalExp = expenses.objects.filter(ExpensesDate__year = selected_yr).aggregate(total_amount = Sum('ExpensesAmount'))['total_amount'] or 0
+    totalInc = income.objects.filter(IncomeDate__year = selected_yr).aggregate(total_amount = Sum('IncomeAmount'))['total_amount'] or 0
     """latestExpDate = request.POST.get('latestExpDate') # Get the latest date for expenses
     latestIncDate = request.POST.get('latestIncDate') # Get the latest date for Income"""
     totalBalance = totalInc - totalExp
@@ -324,4 +321,5 @@ def calculating(request):
     }
 
     return render(request, 'calc.html', context)
+
 

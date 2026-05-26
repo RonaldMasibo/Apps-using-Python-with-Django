@@ -1,7 +1,50 @@
 
 
-.main{
-    display: flex;
-    flex-direction: column;
+*{
+    box-sizing: border-box;
 }
 
+/* Styling each tab */
+.tab{
+    float: left;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    width: 20%;
+    height: 550px;
+}
+
+/* Style the buttons used to open the tab content */
+.tablinks{
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 20px 15px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+/* Change background color when hovered upon */
+#tablinks:hover{
+    background-color: #ddd;
+}
+
+/* Create an active or current button class (Will be created on JS) */
+#tablinks.active{
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent{
+    float: left;
+    padding: 0px 15px;
+    border: 1px solid #ccc;
+    width: 80%;
+    border-left: none;
+    height: 300px;
+    overflow: none;
+}

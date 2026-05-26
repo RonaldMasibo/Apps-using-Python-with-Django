@@ -40,4 +40,3 @@ class expenses(models.Model):
     def __str__(self):
         return f"{self.ExpensesCategory} : {self.ExpensesAmount}"
 
-
