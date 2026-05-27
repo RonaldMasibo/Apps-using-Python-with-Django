@@ -2,6 +2,7 @@
 
 *{
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Styling each tab */
@@ -45,6 +46,73 @@
     border: 1px solid #ccc;
     width: 80%;
     border-left: none;
-    height: 300px;
+    height: 670px;
     overflow: none;
+}
+
+.top1-A{
+    text-align: center;
+}
+
+.top1-A h1{
+    color: rgb(56, 56, 153);
+    font-size: 25px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.top1-A p{
+    font-size: 13px;
+    color: rgb(117, 113, 113);
+    margin-bottom: 30px;
+}
+
+.top2-B{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.top2-B div{
+    width: 250px;
+    margin-top: 8px;
+    border: 1px solid rgb(158, 155, 155);
+    border-radius: 10px;
+    box-shadow: 1px 1px rgb(158, 155, 155);
+}
+
+#BalanceAmount{
+    padding: 0;
+    margin: 0;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+#IncomeAmount{
+    padding: 0;
+    margin: 0;
+    font-weight: 800;
+    font-size: 20px;
+    color: rgb(56, 56, 153);
+}
+
+#ExpensesAmount{
+    padding: 0;
+    margin: 0;
+    font-weight: 800;
+    font-size: 20px;
+    color: red;
+}
+
+.top2-C{
+    display: flex;
+    flex-direction: row;
+}
+
+.top2-C div{
+    padding: 0 10px;
+    width: 50%;
+    height: 350px;
 }

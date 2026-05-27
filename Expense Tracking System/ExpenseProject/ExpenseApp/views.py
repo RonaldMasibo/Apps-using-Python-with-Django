@@ -322,4 +322,3 @@ def calculating(request):
 
     return render(request, 'calc.html', context)
 
-

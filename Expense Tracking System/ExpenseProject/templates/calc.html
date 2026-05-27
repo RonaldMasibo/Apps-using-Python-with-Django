@@ -16,7 +16,7 @@
 <body>
 
     <div class="top1-A">
-        <h1 style="font-size: 20px;">The PesaPlan Application</h1>
+        <h1>The PesaPlan Application</h1>
         <p>Be in control of your finances</p>
     </div>
 
@@ -65,30 +65,30 @@
                 <div class="top2-B">
                     <!-- The numbers -->
                     <div>
-                        <p>Total Balance</p>
+                        <p style="color: rgb(92, 90, 90); font-size: 13px; font-weight: bolder;">Total Balance</p>
                         <p id="BalanceAmount">{{ currentBalance }}</p>
-                        <p>This month</p>
+                        <p style="margin-bottom: 10px; padding-bottom: 0; font-size: 11px;">This month</p>
                     </div>
                     <div>
-                        <p>Total Income</p>
+                        <p style="color: rgb(92, 90, 90); font-size: 13px; font-weight: bolder;">Total Income</p>
                         <p id="IncomeAmount">{{ totalIncome }}</p>
-                        <p>This month</p>
+                        <p style="margin-bottom: 10px; padding-bottom: 0; font-size: 11px;">This month</p>
                     </div>
                     <div>
-                        <p>Total Expenses</p>
+                        <p style="color: rgb(92, 90, 90); font-size: 13px; font-weight: bolder;">Total Expenses</p>
                         <p id="ExpensesAmount">{{ totalExpenses }}</p>
-                        <p>This month</p>
+                        <p style="margin-bottom: 10px; padding-bottom: 0; font-size: 11px;">This month</p>
                     </div>
                 </div>
                 <div class="top2-C">
                     <!-- The Charts -->
                     {% if expenses_data %}
-                        <div class="ExpensesbarChart" style="width: 50%;">
+                        <div class="ExpensesbarChart">
                             <canvas id="expenseChart"></canvas>
                         </div>
                     {% endif %}
                     {% if income_data %}
-                        <div class="IncomelineChart" style="width: 50%;">
+                        <div class="IncomelineChart">
                             <canvas id="incomeChart"></canvas>
                         </div>
                     {% endif %}
@@ -128,6 +128,7 @@
                 }]
             },
             options: {
+                maintainAspectRatio: false,
                 responsive: true,
                 plugins: {
                     title: {
@@ -168,6 +169,7 @@
                 }]
             },
             options: {
+                maintainAspectRatio: false,
                 responsive: true,
                 plugins: {
                     legend: {
@@ -223,6 +225,5 @@
         // Choosing the default tab that will be displayed
         document.getElementById("tablinks1").click();
     </script>
-
 </body>
 </html>
