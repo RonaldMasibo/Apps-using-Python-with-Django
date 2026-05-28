@@ -24,6 +24,10 @@
     <div class="main">
         <div class="top1">
             <div class="tab">
+                <div class="tabWelcome">
+                    <img width="55" height="55" src="https://img.icons8.com/fluency/48/test-account--v1.png" alt="test-account--v1"/>
+                    <h1>Welcome!</h1>
+                </div>
                 <button class="tablinks" id="tablinks1" onclick="openTab(event, 'Tab1')">Dashboard</button>
                 <button class="tablinks" onclick="openTab(event, 'Tab2')">Income</button>
                 <button class="tablinks" onclick="openTab(event, 'Tab3')">Expenses</button>
@@ -42,7 +46,7 @@
             <div class="top2">
                 <!-- For Selecting the Year -->
                 <div class="top2-A">
-                    <form method="POST">
+                    <form method="POST" class="form1">
                         {% csrf_token %}
                         <label for="year"><strong>Select Year</strong></label>
                         <select name="year" id="year">
@@ -106,6 +110,7 @@
             <h2>asceascewc</h2>
         </div>
     </div>
+
 
     <!-- JS code -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
