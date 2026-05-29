@@ -12,6 +12,7 @@ from django.utils import timezone
 import json
 
 
+
 # Create your views here.
 
 def index(request):
@@ -300,10 +301,9 @@ def calculating(request):
     # Get total for all expenses, income and balance for the selected year
     totalExp = expenses.objects.filter(ExpensesDate__year = selected_yr).aggregate(total_amount = Sum('ExpensesAmount'))['total_amount'] or 0
     totalInc = income.objects.filter(IncomeDate__year = selected_yr).aggregate(total_amount = Sum('IncomeAmount'))['total_amount'] or 0
-    """latestExpDate = request.POST.get('latestExpDate') # Get the latest date for expenses
-    latestIncDate = request.POST.get('latestIncDate') # Get the latest date for Income"""
     totalBalance = totalInc - totalExp
 
+    
     context = {
         'currentBalance': totalBalance,
         'totalIncome': totalInc,

@@ -1,5 +1,6 @@
 
 
+
 *{
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
@@ -27,6 +28,9 @@ body{
     margin: 0 20px 0 20px;
     background-color: white;
     height: 570px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .tabWelcome{
@@ -49,13 +53,50 @@ body{
 
 .logoutbtn{
     text-align: center;
+    padding: 10px 10px;
 }
 
+.logoutbtn a{
+    text-decoration: none;
+}
+
+.logoutbtn a button{
+    margin-top: 3px;
+    border-radius: 5px;
+    display: block;
+    background-color: rgb(187, 6, 6);
+    color: white;
+    font-weight: bolder;
+    padding: 20px 15px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.logoutbtn a button:hover{
+    background-color: rgb(131, 3, 3);
+    color: white;
+    font-weight: bolder;
+}
+
+
 /* Style the buttons used to open the tab content */
+
+.tab{
+    padding: 10px;
+}
+
 .tablinks{
+    margin-top: 3px;
+    border-radius: 5px;
     display: block;
     background-color: inherit;
-    color: black;
+    font-weight: 600;
+    color: rgb(63, 63, 63);
     padding: 20px 15px;
     width: 100%;
     border: none;
@@ -116,13 +157,13 @@ body{
     flex-direction: row;
     justify-content: space-evenly;
     text-align: center;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .top2-B div{
-    width: 250px;
-    margin-top: 8px;
-    border: 1px solid rgb(158, 155, 155);
+    width: 24%;
+    margin: 8px 3px 10px 0;
+    border: 1px solid rgb(216, 213, 213);
     border-radius: 10px;
     box-shadow: 1px 1px rgb(158, 155, 155);
 }
@@ -148,6 +189,14 @@ body{
     font-weight: 800;
     font-size: 20px;
     color: red;
+}
+
+#SavingsAmount{
+    padding: 0;
+    margin: 0;
+    font-weight: 800;
+    font-size: 20px;
+    color: green;
 }
 
 .top2-C{
