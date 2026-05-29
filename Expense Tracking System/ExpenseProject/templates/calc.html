@@ -69,6 +69,7 @@
                         <p class="error">{{ error }}</p>
                     {% endif %}
                 </div>
+
                 <div class="top2-B">
                     <!-- The numbers -->
                     <div>
@@ -77,12 +78,12 @@
                         <p style="margin-bottom: 10px; padding-bottom: 0; font-size: 11px;">This month</p>
                     </div>
                     <div>
-                        <p style="color: rgb(92, 90, 90); font-size: 13px; font-weight: bolder;">Total Income</p>
+                        <p style="color: rgb(92, 90, 90); font-size: 13px; font-weight: bolder;">Monthly Income</p>
                         <p id="IncomeAmount">{{ totalIncome }}</p>
                         <p style="margin-bottom: 10px; padding-bottom: 0; font-size: 11px;">This month</p>
                     </div>
                     <div>
-                        <p style="color: rgb(92, 90, 90); font-size: 13px; font-weight: bolder;">Total Expenses</p>
+                        <p style="color: rgb(92, 90, 90); font-size: 13px; font-weight: bolder;">Monthly Expenses</p>
                         <p id="ExpensesAmount">{{ totalExpenses }}</p>
                         <p style="margin-bottom: 10px; padding-bottom: 0; font-size: 11px;">This month</p>
                     </div>
@@ -92,6 +93,7 @@
                         <p style="margin-bottom: 10px; padding-bottom: 0; font-size: 11px;">This month</p>
                     </div>
                 </div>
+
                 <div class="top2-C">
                     <!-- The Charts -->
                     {% if expenses_data %}
@@ -110,7 +112,63 @@
 
         <!-- Tab for income -->
         <div class="tabcontent" id="Tab2">
-            <h3>scdcsdcewdd</h3>
+            <div class="incomeTabContent">
+                <!-- Summarising the numbers of income -->
+                <div class="incomeDetails">
+                    <div>
+                        <p style="color: rgb(92, 90, 90); font-size: 13px; font-weight: bolder;">Total Income</p>
+                        <p id="BalanceAmount">Amount</p>
+                        <p style="margin-bottom: 10px; padding-bottom: 0; font-size: 11px;">Last 30 days</p>
+                    </div>
+                    <div>
+                        <p style="color: rgb(92, 90, 90); font-size: 13px; font-weight: bolder;">Categories</p>
+                        <p id="IncomeAmount">Categories</p>
+                        <p style="margin-bottom: 10px; padding-bottom: 0; font-size: 11px;">Different Types</p>
+                    </div>
+                    <div>
+                        <p style="color: rgb(92, 90, 90); font-size: 13px; font-weight: bolder;">Daily Average</p>
+                        <p id="ExpensesAmount">The amount</p>
+                        <p style="margin-bottom: 10px; padding-bottom: 0; font-size: 11px;">Last 30 days</p>
+                    </div>
+                </div>
+
+                <!-- CRUD operations all sources of Income and their main overview -->
+                <div class="mainIncomeDetails">
+                    <div class="incomeCRUD">
+                        <!--For Income Categories -->
+                        <div class="IncomeCategory">
+                            <div class="AddingIncomeCategories">
+                                <!-- Button to open a Modal Income Category form -->
+                                <button onclick="openIncomeCategory()" style="background-color: rgb(4, 85, 4); color: white; border-radius: 10px;">Add Income Category</button>
+
+                                <!-- The Modal div -->
+                                <div class="modal add_income_category" id="id01">
+                                    <!-- Close button -->
+                                    <span class="close" onclick="closeIncomeCategory()" title="Close Modal">&times;</span>
+
+                                    <!-- Form for Adding the Income categories -->
+                                    <form action="/action_page.php" class="modal-content" method="POST">
+                                        {% csrf_token %}
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="ListingIncomeCategories">
+                                <!-- Button to open a Modal List of ALL Income categories -->
+                                <button onclick="ListIncomeCategories()" style="background-color: rgb(56, 56, 153); color: white; border-radius: 10px">List ALL Income Categories</button>
+                            </div>
+                        </div>
+
+                        <!-- For Income Database -->
+                        <div class="IncomeDB">
+                            <div class="AddingIncome"></div>
+                            <div class="ListingIncome"></div>
+                        </div>
+                    </div>
+
+                    <!-- Pie chart for showcasing how income is distributed -->
+                    <div class="mainIncomeChart"></div>
+                </div>
+            </div>
         </div>
 
         <!-- Tab for Expenses -->

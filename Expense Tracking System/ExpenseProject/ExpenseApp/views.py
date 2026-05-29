@@ -84,10 +84,12 @@ def calculating(request):
     incomeChart_data = []
     error = None
     
+
     month_names = [
         'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug',
         'Sep', 'Oct', 'Nov', 'Dec'
     ]
+
 
     # Populate dropdown menu with the years that have Income and Expenses
     availableIncomeYears = income.objects.dates('IncomeDate', 'year', order='DESC')
@@ -159,12 +161,14 @@ def calculating(request):
         # Adding Income
         if "add_income" in request.POST:
             # Get fields for Income
+            incomeCategory = request.POST.get('Income_category')
             incomeAmount = request.POST.get('Income_amount')
             incomeDescription = request.POST.get('Income_description')
             incomeDate = request.POST.get('Income_date')
 
             # Adding income to the database
             incomeDetails = income.objects.create(
+                incomeCategory = incomeCategory,
                 IncomeAmount = incomeAmount,
                 IncomeDescription = incomeDescription,
                 IncomeDate = incomeDate,
