@@ -210,3 +210,111 @@ body{
     height: 350px;
 }
 
+/* Centering the heading of the form */
+.modal-content h3{
+    text-align: center;
+}
+
+/* Full width of input fields */
+.modal-content input[type=text]{
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    background-color: #e7dada;
+}
+
+/* Background color when inputs get focus */
+.modal-content input[type=text]:focus{
+    background-color: rgb(34, 38, 39);
+    color: #e7dada;
+    outline: none;
+}
+
+hr{
+    margin-bottom: 20px;
+}
+
+/* Set a style for all the buttons of the modal */
+.AddingIncomeCategories button{
+    background-color: rgba(8, 84, 197, 0.667)6D;
+    color: white;
+    padding: 15px 20px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.AddingIncomeCategories button:hover{
+    opacity: 1;
+}
+
+/* Button for adding the income source */
+.AddIncomeSourcebtn{
+    color: white;
+    background-color: rgb(4, 85, 4);
+    border-radius: 5px;
+    width: 40%;
+}
+
+/* Cancel button */
+.cancelbtn{
+    padding: 15px 21px;
+    background-color: red;
+    border-radius: 5px;
+    width: 40%;
+}
+
+
+/* Add padding to container elements */
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: #474e5d;
+    padding-top: 50px;
+}
+
+/* Adding Income Category form */
+.modal-content{
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom */
+    width: 80%;
+    border: 1px solid #757171;
+}
+
+/* The close button */
+.close{
+    position: relative;
+    float: right;
+    right: 30px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #f7f0f0;
+}
+
+.close:hover, .close:focus{
+    color: red;
+    cursor: pointer;
+}
+
+.clearfix{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+/* Clear floats */
+.clearfix::after{
+    content: "";
+    clear: both;
+    display: table;
+}

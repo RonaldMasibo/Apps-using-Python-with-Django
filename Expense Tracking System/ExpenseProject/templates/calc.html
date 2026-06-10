@@ -147,11 +147,26 @@
                                     <span class="close" onclick="closeIncomeCategory()" title="Close Modal">&times;</span>
 
                                     <!-- Form for Adding the Income categories -->
-                                    <form action="/action_page.php" class="modal-content" method="POST">
+                                    <form class="modal-content" method="POST" enctype="multipart/form-data">
                                         {% csrf_token %}
+                                        <div class="container">
+                                            <h3>Add Income Category</h3>
+                                            <hr>
+                                            <label for="CategoryForIncomes"><b>Add source of Income</b></label>
+                                            <input type="text" name="Income_category" id="CategoryForIncomes">
+                                            <br><br>
+
+                                            <div class="clearfix">
+                                                <!-- If you cancel, the modal will close -->
+                                                <button class="cancelbtn" onclick="closeIncomeCategory()"><b>Cancel</b></button>
+                                                <!-- Submitting the Source of Income -->
+                                                <button type="submit" class="AddIncomeSourcebtn"><b>Add Income</b></button>
+                                            </div>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
+
                             <div class="ListingIncomeCategories">
                                 <!-- Button to open a Modal List of ALL Income categories -->
                                 <button onclick="ListIncomeCategories()" style="background-color: rgb(56, 56, 153); color: white; border-radius: 10px">List ALL Income Categories</button>
@@ -274,7 +289,6 @@
         });
 
 
-
         // For creating tabs and tablinks
         function openTab(evt, TabNumber){
 
@@ -300,6 +314,29 @@
 
         // Choosing the default tab that will be displayed
         document.getElementById("tablinks1").click();
+
+
+        // JS code for opening the modal forms
+        // Get the modal
+        var modal = document.getElementById("id01");
+
+        // Opening the modal
+        function openIncomeCategory(){
+            modal.style.display = "block";
+        };
+
+        // Closing the modal
+        function closeIncomeCategory(){
+            modal.style.display = "none";
+        };
+
+        // When user clicks anywhere outside the modal, it closes
+        window.onclick = function(event){
+            if(event.target == modal){
+                modal.style.display = "none";
+            }
+        }
     </script>
+
 </body>
 </html>
