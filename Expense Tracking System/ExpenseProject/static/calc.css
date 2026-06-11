@@ -210,6 +210,69 @@ body{
     height: 350px;
 }
 
+
+.mainIncomeDetails{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.incomeCRUD{
+    width: 30%;
+}
+
+.IncomeCategory{
+    display: flex;
+    flex-direction: column;
+}
+
+/* Set a style for all the buttons of the modal */
+.AddingIncomeCategories button{
+    background-color: rgb(4, 85, 4);
+    color: white;
+    padding: 15px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.AddingIncomeCategories button:hover{
+    opacity: 1;
+    font-weight: bolder;
+}
+
+/* Add padding to container elements */
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: #474e5d;
+    padding-top: 50px;
+}
+
+/* Adding Income Category form */
+.modal-content{
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom */
+    padding: 40px 0;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #757171;
+    border-radius: 10px;
+}
+
+
 /* Centering the heading of the form */
 .modal-content h3{
     text-align: center;
@@ -235,22 +298,6 @@ hr{
     margin-bottom: 20px;
 }
 
-/* Set a style for all the buttons of the modal */
-.AddingIncomeCategories button{
-    background-color: rgba(8, 84, 197, 0.667)6D;
-    color: white;
-    padding: 15px 20px;
-    margin: 10px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    opacity: 0.9;
-}
-
-.AddingIncomeCategories button:hover{
-    opacity: 1;
-}
-
 /* Button for adding the income source */
 .AddIncomeSourcebtn{
     color: white;
@@ -265,29 +312,6 @@ hr{
     background-color: red;
     border-radius: 5px;
     width: 40%;
-}
-
-
-/* Add padding to container elements */
-.modal{
-    display: none;
-    position: fixed;
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; /* Enable scroll if needed */
-    background-color: #474e5d;
-    padding-top: 50px;
-}
-
-/* Adding Income Category form */
-.modal-content{
-    background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom */
-    width: 80%;
-    border: 1px solid #757171;
 }
 
 /* The close button */
@@ -308,7 +332,7 @@ hr{
 
 .clearfix{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-evenly;
 }
 
@@ -317,4 +341,30 @@ hr{
     content: "";
     clear: both;
     display: table;
+}
+
+
+.ListingIncomeCategories{
+    margin-left: 5px;
+}
+
+.ListingIncomeCategories button{
+    background-color: rgb(56, 56, 153);
+    color: white;
+    border-radius: 10px;
+    padding: 15px 20px 15px 35px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.ListingIncomeCategories button:hover{
+    opacity: 1;
+    font-weight: bolder;
+}
+
+.mainIncomeChart{
+    width: 60%;
 }
