@@ -245,7 +245,7 @@ body{
 }
 
 /* Add padding to container elements */
-.modal{
+.modal, .modal2{
     display: none;
     position: fixed;
     z-index: 1; /* Sit on top */
@@ -259,7 +259,7 @@ body{
 }
 
 /* Adding Income Category form */
-.modal-content{
+.modal-content, .ListedIncomeCategories{
     background-color: #fefefe;
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom */
     padding: 40px 0;

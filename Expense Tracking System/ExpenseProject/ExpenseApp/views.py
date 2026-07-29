@@ -116,6 +116,9 @@ def calculating(request):
 
             # Fetch the object related to the passed ID and save it
             obj = get_object_or_404(Incomecategories, id = incomeCategory_ID)
+
+            # Update & save the edited info
+            obj.forIncome = newIncomeCategory
             obj.save()
         
         # Deleting an income category
@@ -147,6 +150,9 @@ def calculating(request):
 
             # Fetch the object related to the passed ID and save it
             obj = get_object_or_404(Expensescategories, id = expenseCategory_ID)
+
+            # Update & save the edited info
+            obj.forExpenses = newExpenseCategory
             obj.save()
         
         # Deleting an expense category
@@ -309,6 +315,14 @@ def calculating(request):
 
     
     context = {
+        # Every table in the models
+        'income_categories_table': Incomecategories,
+        'no_incomeCategories': Incomecategories.objects.all().count(),
+        'income_table': income,
+        'expenses_categories_table': Expensescategories,
+        'expenses_table': expenses,
+
+        # Totals from the entered data
         'currentBalance': totalBalance,
         'totalIncome': totalInc,
         'totalExpenses': totalExp,
