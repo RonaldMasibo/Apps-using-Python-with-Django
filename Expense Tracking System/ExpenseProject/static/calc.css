@@ -259,7 +259,7 @@ body{
 }
 
 /* Adding Income Category form */
-.modal-content, .ListedIncomeCategories{
+.modal-content{
     background-color: #fefefe;
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom */
     padding: 40px 0;
@@ -368,3 +368,16 @@ hr{
 .mainIncomeChart{
     width: 60%;
 }
+
+.listedIncomeCategories{
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom */
+    padding: 40px 0;
+    width: 70%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #757171;
+    border-radius: 10px;
+}
+

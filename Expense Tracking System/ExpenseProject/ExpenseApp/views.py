@@ -316,7 +316,7 @@ def calculating(request):
     
     context = {
         # Every table in the models
-        'income_categories_table': Incomecategories,
+        'income_categories_table': Incomecategories.objects.all(),
         'no_incomeCategories': Incomecategories.objects.all().count(),
         'income_table': income,
         'expenses_categories_table': Expensescategories,
