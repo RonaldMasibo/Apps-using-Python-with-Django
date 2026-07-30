@@ -274,7 +274,7 @@ body{
 
 
 /* Centering the heading of the form */
-.modal-content h3{
+.modal-content h3, .listedIncomeCategories h3{
     text-align: center;
 }
 
@@ -348,7 +348,7 @@ hr{
     margin-left: 5px;
 }
 
-.ListingIncomeCategories button{
+.ListingIncomeCategoriesButton{
     background-color: rgb(56, 56, 153);
     color: white;
     border-radius: 10px;
@@ -360,7 +360,7 @@ hr{
     opacity: 0.9;
 }
 
-.ListingIncomeCategories button:hover{
+.ListingIncomeCategoriesButton:hover{
     opacity: 1;
     font-weight: bolder;
 }
@@ -374,10 +374,18 @@ hr{
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom */
     padding: 40px 0;
     width: 70%;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     border: 1px solid #757171;
     border-radius: 10px;
 }
 
+.listedIncomeCategories table{
+    display: flex;
+    flex-direction: column;
+}
+
+.tableIncomeCategories tr{
+    display: flex;
+    flex-direction: row;
+}

@@ -170,7 +170,7 @@
 
                             <div class="ListingIncomeCategories">
                                 <!-- Button to open a Modal List of ALL Income categories -->
-                                <button onclick="ListIncomeCategories()">List Categories</button>
+                                <button class="ListingIncomeCategoriesButton" onclick="ListIncomeCategories()">List Categories</button>
 
                                 <!-- The modal div -->
                                 <div class="modal2" id="id02">
@@ -179,14 +179,10 @@
 
                                     <!-- Listing the Income Categories -->
                                     <div class="listedIncomeCategories">
+                                        <h3>Income Categories</h3>
                                         <!-- The Categories -->
                                         <table>
-                                            <thead>
-                                                <tr>
-                                                    <th>Income Category</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                            <tbody class="tableIncomeCategories">
                                                 <tr>
                                                     {% for x in income_categories_table %}
                                                         <div class="categorydetail">
@@ -194,29 +190,32 @@
                                                         </div>
                                                         <div class="categorybuttons">
                                                             <!-- Editing Income Category -->
-                                                            <button type="button" class="Editbtn" onclick="enable_edit_IncomeCategory({{ x.id }})"><b>Edit Category</b></button>
-                                                            <!-- Editing form -->
-                                                            <form class="editIncomeCategoryForm" style="display: none;" method="POST" enctype="multipart/form-data" id="edit-{{ x.id }}">
-                                                                {% csrf_token %}
-                                                                <!-- Get the ID of the Income Caegory -->
-                                                                <input type="hidden" name="incomeCategory_ID" value="{{x.id}}">
+                                                            <div class="editCategoryButtons">
+                                                                <button type="button" class="Editbtn" onclick="enable_edit_IncomeCategory({{ x.id }})"><b>Edit Category</b></button>
+                                                                <!-- Editing form -->
+                                                                <form class="editIncomeCategoryForm" style="display: none;" method="POST" enctype="multipart/form-data" id="edit-{{ x.id }}">
+                                                                    {% csrf_token %}
+                                                                    <!-- Get the ID of the Income Caegory -->
+                                                                    <input type="hidden" name="incomeCategory_ID" value="{{x.id}}">
 
-                                                                <label>
-                                                                    Update Income Category
-                                                                </label>
-                                                                <input type="text" name="new_IncomeCategory" value="{{x.forIncome}}">
+                                                                    <label>Update Income Category</label>
 
-                                                                <button type="submit" class="updateIncomeCategory" name="edit_income_category"><b>Update Category</b></button>
-                                                            </form>
+                                                                    <input type="text" name="new_IncomeCategory" value="{{x.forIncome}}">
 
-                                                            <form enctype="multipart/form-data" method="POST">
-                                                                {% csrf_token %}
-                                                                <!-- Get Id of the income category -->
-                                                                <input type="hidden" name="incomeCategory_ID" value="{{x.id}}">
+                                                                    <button type="submit" class="updateIncomeCategory" name="edit_income_category"><b>Update Category</b></button>
+                                                                </form>
+                                                            </div>
 
-                                                                <!-- Deleting Income Category -->
-                                                                <button type="submit" class="Deletebtn" name="delete_income_category" style="background-color: red;"><b>Delete Category</b></button>
-                                                            </form>
+                                                            <div class="deleteCategoryButtons">
+                                                                <form enctype="multipart/form-data" method="POST">
+                                                                    {% csrf_token %}
+                                                                    <!-- Get Id of the income category -->
+                                                                    <input type="hidden" name="incomeCategory_ID" value="{{x.id}}">
+
+                                                                    <!-- Deleting Income Category -->
+                                                                    <button type="submit" class="Deletebtn" name="delete_income_category" style="background-color: red;"><b>Delete Category</b></button>
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     {% endfor %}
                                                 </tr>
