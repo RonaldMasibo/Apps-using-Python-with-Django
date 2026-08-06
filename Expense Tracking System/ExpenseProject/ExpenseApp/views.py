@@ -101,10 +101,13 @@ def calculating(request):
             incomeCategory = request.POST.get('Income_category')
 
             # Adding income category to database
-            incomeCategoryDetails = Incomecategories.objects.create(
-                forIncome = incomeCategory
-            )
-            incomeCategoryDetails.save()
+            if Incomecategories.objects.filter(forIncome=incomeCategory.upper()):
+                messages.info(request, 'The income category is already in database!!')
+            else:
+                incomeCategoryDetails = Incomecategories.objects.create(
+                    forIncome = incomeCategory.upper()
+                )
+                incomeCategoryDetails.save()
 
         # Editing an income category
         if "edit_income_category" in request.POST:
@@ -118,8 +121,11 @@ def calculating(request):
             obj = get_object_or_404(Incomecategories, id = incomeCategory_ID)
 
             # Update & save the edited info
-            obj.forIncome = newIncomeCategory
-            obj.save()
+            if Incomecategories.objects.filter(forIncome=newIncomeCategory.upper()):
+                messages.info(request, 'The Income category is already in database!!')
+            else:
+                obj.forIncome = newIncomeCategory.upper()
+                obj.save()
         
         # Deleting an income category
         if "delete_income_category" in request.POST:

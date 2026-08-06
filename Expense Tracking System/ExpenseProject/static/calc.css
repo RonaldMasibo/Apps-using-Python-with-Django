@@ -389,3 +389,10 @@ hr{
     display: flex;
     flex-direction: row;
 }
+
+.editIncomeCategoryForm div cancelBtn{
+    padding: 15px 21px;
+    background-color: red;
+    border-radius: 5px;
+    width: 20%;
+}
