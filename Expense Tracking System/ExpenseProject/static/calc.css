@@ -380,19 +380,40 @@ hr{
     border-radius: 10px;
 }
 
-.listedIncomeCategories table{
+.infoIncomeCategories{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0 0 10px 0;
+    border-bottom: 1px solid lightgray;
+}
+
+.editIncomeCategoryForm{
     display: flex;
     flex-direction: column;
 }
 
-.tableIncomeCategories tr{
-    display: flex;
-    flex-direction: row;
+.Editbtn, .Deletebtn{
+    margin: 8px 0;
+    padding: 3px;
+    width: 100%;
 }
 
-.editIncomeCategoryForm div cancelBtn{
-    padding: 15px 21px;
-    background-color: red;
+.editIncomeCategoryForm div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.editIncomeCategoryForm div .updateIncomeCategory{
     border-radius: 5px;
-    width: 20%;
+    width: 48%;
+    margin-top: 3px;
+}
+
+.editIncomeCategoryForm div .cancelBtn{
+    border-radius: 5px;
+    width: 48%;
+    margin-top: 3px;
 }
