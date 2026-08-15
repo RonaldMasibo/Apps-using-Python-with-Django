@@ -144,7 +144,7 @@
                                 <!-- The Modal div -->
                                 <div class="modal" id="id01">
                                     <!-- Close button -->
-                                    <span class="close" onclick="closeIncomeCategory()" title="Close Modal">&times;</span>
+                                    <span class="close" onclick="closeIncomeCategory()" title="Close">&times;</span>
 
                                     <!-- Form for Adding the Income categories -->
                                     <form class="modal-content" method="POST" enctype="multipart/form-data">
@@ -175,7 +175,7 @@
                                 <!-- The modal div -->
                                 <div class="modal2" id="id02">
                                     <!-- Close button -->
-                                    <span class="close" onclick="closeIncomeCategory2()" title="Close Modal2">&times;</span>
+                                    <span class="close" onclick="closeIncomeCategory2()" title="Close">&times;</span>
 
                                     <!-- Listing the Income Categories -->
                                     <div class="listedIncomeCategories">
@@ -224,7 +224,49 @@
 
                         <!-- For Income Database -->
                         <div class="IncomeDB">
-                            <div class="AddingIncome"></div>
+                            <div class="AddingIncome">
+                                <!-- Button to open a Modal Income table form -->
+                                <button onclick="openIncomeTable()">Add Income</button>
+
+                                <!-- The modal div -->
+                                <div class="modal3" id="id03">
+                                    <!-- Close button -->
+                                    <span class="close" onclick="closeIncomeTable()" title="Close">&times;</span>
+
+                                    <!-- Form for adding Income -->
+                                    <form method="POST" class="modal-content3" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="container2">
+                                            <h3>Add Income Details</h3>
+                                            <hr>
+                                            <label for="DetailsForIncomeCategory"><b>Choose Income Category</b></label>
+                                            <select name="Income_category" id="DetailsForIncomeCategory">
+                                                {% for x in income_categories_table %}
+                                                    <option value="{{ x.forIncome }}">{{ x.forIncome }}</option>
+                                                {% endfor %}
+                                            </select>
+                                            <br>
+                                            <label for="IncomeAmount">Enter Amount (Ksh)</label>
+                                            <input type="number" name="Income_amount" id="IncomeAmount" min="1">
+                                            <br>
+                                            <label for="IncomeDescription">Describe Income</label>
+                                            <input type="text" name="Income_description" id="IncomeDescription" placeholder="(Optional)">
+                                            <br>
+                                            <label for="IncomeDate">Date for Income</label>
+                                            <input type="date" name="Income_date" id="IncomeDate" min="2020-01-01">
+                                            <br><br>
+
+                                            <div class="clearfix">
+                                                <!-- Submitting the Source of Income -->
+                                                <button type="submit" class="AddIncomeSourcebtn" name="add_income"><b>Add Income</b></button>
+
+                                                <!-- If you cancel, the modal will close -->
+                                                <button type="button" class="cancelbtn" onclick="closeIncomeTable()" style="background-color: red;"><b>Cancel</b></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                             <div class="ListingIncome"></div>
                         </div>
                     </div>
@@ -371,6 +413,7 @@
         // Get the modal
         var modal = document.getElementById("id01");
         var modal2 = document.getElementById("id02");
+        var modal3 = document.getElementById("id03");
 
         // Opening the modals
         function openIncomeCategory(){
@@ -378,6 +421,9 @@
         };
         function ListIncomeCategories(){
             modal2.style.display = "block";
+        };
+        function openIncomeTable(){
+            modal3.style.display = "block";
         };
         
         // Function to enable editing an Income Category
@@ -393,6 +439,9 @@
         function closeIncomeCategory2(){
             modal2.style.display = "none";
         };
+        function closeIncomeTable(){
+            modal3.style.display = "none";
+        };
 
         // Function to close the editing form
         function close_edit_IncomeCategory(id){
@@ -407,6 +456,10 @@
 
             if(event.target == modal2){
                 modal2.style.display = "none";
+            }
+
+            if(event.target == modal3){
+                modal3.style.display = "none";
             }
         }
     </script>
